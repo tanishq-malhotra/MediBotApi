@@ -6,6 +6,8 @@ let doctor = require("./mongo/models").doctorModel;
 let user = require("./mongo/models").userModel;
 let department = require("./mongo/models").departmentModel;
 let mongoose = require("mongoose");
+let scrapper = require("./public/assets/js/scrapper").scrapper;
+let departments = require("./public/assets/js/scrapper").departments;
 
 // Welcome message
 router.get("/", (req, res) => {
@@ -171,6 +173,33 @@ router.post("/bookAppointment", async (req, res) => {
          );*/
   }
   res.send();
+});
+
+router.get("/updateDatabase", (req, res) => {
+  let update = async () => {
+    await scrapper();
+
+    await department.deleteMany({});
+    for (let i = 0; i < departments.length; i++) {
+      await department
+        .create({
+          name: departments[i].name,
+          id: departments[i].id,
+          doctors: departments[i].doctors,
+          more: departments[i].more
+        })
+        .then(() => {
+          res.end();
+        })
+        .catch(error => {
+          throw error;
+        });
+    }
+
+    //console.log(departments.length);
+    res.end();
+  };
+  update();
 });
 
 module.exports = router;
