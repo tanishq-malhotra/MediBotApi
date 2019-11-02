@@ -2,7 +2,7 @@ let mongoose = require("mongoose");
 
 module.exports = () => {
   mongoose.connect(
-    "mongodb+srv://Admin:uNyCHSSDl5bVAqL5@cluster0-dvhcj.azure.mongodb.net/bot?retryWrites=true&w=majority",
+    "mongodb+srv://Admin:uNyCHSSDl5bVAqL5@cluster0-dvhcj.azure.mongodb.net/medibot?retryWrites=true&w=majority",
      {
             auth: {
                 user: "Admin",
