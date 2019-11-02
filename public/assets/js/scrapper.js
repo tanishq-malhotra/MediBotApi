@@ -12,7 +12,7 @@ async function openBrowser() {
 }
 
 async function closeBrowser() {
-  browser.close();
+  await browser.close();
 }
 
 async function fetchDepartments() {
@@ -46,7 +46,7 @@ async function fetchDepartments() {
       });
     }
   });
-  page.close();
+  await page.close();
   console.log("Fetched Departments!");
 }
 
@@ -90,7 +90,9 @@ async function fetchDoctors() {
             .replace(/\s\s+/g, " "),
           designation: $(trData)
             .find("td:nth-child(3)")
-            .html(),
+            .html()
+            .trim()
+            .replace(/&amp;/g, '&'),
           email: $(trData)
             .find("td:nth-child(5)")
             .html()
@@ -99,7 +101,7 @@ async function fetchDoctors() {
     });
     departments[i]["doctors"] = doctors;
   }
-  page.close();
+  await page.close();
 }
 
 let scrapper = async () => {
