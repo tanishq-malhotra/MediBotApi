@@ -1,10 +1,15 @@
 let mongoose = require("mongoose");
 
 module.exports = () => {
-  mongoose
-    .connect("mongodb://localhost:27017/medibot", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+  mongoose.connect(
+    "mongodb+srv://Admin:uNyCHSSDl5bVAqL5@cluster0-dvhcj.azure.mongodb.net/bot?retryWrites=true&w=majority",
+     {
+            auth: {
+                user: "Admin",
+                password: "uNyCHSSDl5bVAqL5",
+            },
+            useNewUrlParser: true,
+            useUnifiedTopology: true
     })
     .then(() => {
       console.log("Successfully connected to Database");
