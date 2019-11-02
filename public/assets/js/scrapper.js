@@ -7,7 +7,7 @@ let departments = [];
 
 async function openBrowser() {
   browser = await puppeteer.launch({
-    headless: false
+    headless: true
   });
 }
 
@@ -92,7 +92,7 @@ async function fetchDoctors() {
             .find("td:nth-child(3)")
             .html()
             .trim()
-            .replace(/&amp;/g, '&'),
+            .replace(/&amp;/g, "&"),
           email: $(trData)
             .find("td:nth-child(5)")
             .html()
